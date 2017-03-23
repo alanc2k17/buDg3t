@@ -1,14 +1,16 @@
 var revenue = [552, 399];
 var dyn = d3.select(".chart");
 
-var makeBars = function() {
-d3.select(".chart")
-    .selectAll("div")
-    .data( revenue )
-    .enter().append("div")
-    .style("width", function(d) {
-	return d + "px"; })
-    .text(function(d) {return d;} );
+var makeBars = function(m,dur) {
+    dyn.selectAll("div")
+	.data( revenue )
+	.enter().append("div")
+	.style("width",0)
+	.transition()
+	.duration(dur)
+	.style("width", function(d) {
+	    return d*m + "px"; })
+	.text(function(d) {return d;} );
 }
 
 var transition = function(m, dur) {
@@ -20,3 +22,5 @@ var transition = function(m, dur) {
 	    return d * m + "px";
 	});
 };
+
+makeBars(1,3000);
